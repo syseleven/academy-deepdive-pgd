@@ -1,0 +1,21 @@
+---
+helmDefaults:
+  wait: true
+  timeout: 1200
+
+releases:
+  - name: phpfpm
+    createNamespace: true
+    chart: ./phpfpm
+    missingFileHandler: Warn
+    values:
+      - ./phpfpm/values.yaml
+
+  - name: nginx
+    createNamespace: true
+    chart: ./nginx
+    missingFileHandler: Warn
+    values:
+      - ./nginx/values.yaml
+    needs:
+      - 'phpfpm'

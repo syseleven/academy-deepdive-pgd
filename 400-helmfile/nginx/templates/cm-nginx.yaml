@@ -1,0 +1,25 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nginx-config
+data:
+  nginx.conf: |
+    events {
+    }
+    http {
+      server {
+        listen 0.0.0.0:80;
+        server_name _;
+        root /app;
+        location / {
+          try_files $uri $uri/index.php;
+        }
+        location ~ \.php$ {
+          fastcgi_pass phpfpm:9000;
+          fastcgi_index index.php;
+          # this include works with nginx:x.x.x-alpine only ("alpine"-images)
+          # regular "nginx-images" must use "include fastcgi_params;" and additional directives
+          include fastcgi.conf;
+        }
+      }
+    }

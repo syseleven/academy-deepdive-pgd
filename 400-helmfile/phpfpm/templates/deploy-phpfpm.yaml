@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: phpfpm
+  name: phpfpm
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: phpfpm
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: phpfpm
+    spec:
+      volumes:
+        - name: phpfpm-application
+          configMap:
+            name: phpfpm-application
+      containers:
+        - image: php:8.0.9-fpm-alpine
+          name: phpfpm
+          volumeMounts:
+            - name: phpfpm-application
+              mountPath: /app/index.php
+              subPath: index.php
