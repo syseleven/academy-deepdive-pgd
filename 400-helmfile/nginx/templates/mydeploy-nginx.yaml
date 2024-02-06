@@ -20,7 +20,7 @@ spec:
           configMap:
             name: nginx-config
       containers:
-      - image: nginx:1.21.1-alpine
+      - image: nginx:1.25.3-alpine
         name: nginx
         volumeMounts:
           - name: nginx-config-volume

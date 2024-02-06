@@ -34,16 +34,22 @@
   kubectl get pods -l app=nginx -o wide
   ```
 
-* We have 8 worker nodes and now scale the deployment up until there are more pods than nodes available
+* We have a certain amount of worker nodes and now scale up the deployment until there are more pods than nodes available
 
   ```shell
-  kubectl scale deployment nginx --replicas=10
+  # Determine the number of worker nodes
+  NODECOUNT=`kubectl get no --no-headers=true | wc -l`
+  
+  # Scale up the deployment
+  kubectl scale deployment nginx --replicas=`expr $NODECOUNT + 2`
+  
+  # Verify the distribution of pods
   kubectl get pods -l app=nginx -o wide
   ```
 
 * Expected result:
-  * new pods remain in "Pending" state since they cannot be scheduled due to their
-    restriction not to be coupled with each other on the same node
+  * some new pods remain in state `Pending` since they cannot be scheduled due to their
+    restriction "not to be coupled with each other on the same node"
   * even if the topologyKey would require them to do so
   * This happens because the antiAffinity is validated in the moment of scheduling
 
@@ -77,18 +83,24 @@
   kubectl get pods -l app=nginx -o wide
   ```
 
-* We have 8 worker nodes and now scale the deployment up until there should be more pods than nodes
+* We have a certain amount of worker nodes and now scale up the deployment until there are more pods than nodes available
 
   ```shell
-  kubectl scale deployment nginx --replicas=10
+  # Determine the number of worker nodes
+  NODECOUNT=`kubectl get no --no-headers=true | wc -l`
+  
+  # Scale up the deployment
+  kubectl scale deployment nginx --replicas=`expr $NODECOUNT + 2`
+  
+  # Verify the distribution of pods
   kubectl get pods -l app=nginx -o wide
   ```
 
 * Expected result:
   * The new pods can now be scheduled
-  * the are scheduled on nodes where there are already pods of the same type running
-  * This is possible because the antiAffinity type `preferred` does not enforce
-    distribution in the moment of schdeuling
+  * they are scheduled on nodes where there are already pods of the same type running
+  * This is possible because the antiAffinity type `preferred` does not enforce a strict
+    distribution in the moment of scheduling
 
 ### Clean up
 
