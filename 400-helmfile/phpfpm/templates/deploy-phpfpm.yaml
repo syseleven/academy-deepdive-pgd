@@ -20,7 +20,7 @@ spec:
           configMap:
             name: phpfpm-application
       containers:
-        - image: php:8.0.9-fpm-alpine
+        - image: php:8.2.0-fpm-alpine
           name: phpfpm
           volumeMounts:
             - name: phpfpm-application
