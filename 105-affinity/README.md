@@ -38,7 +38,7 @@
 
   ```shell
   # Determine the number of worker nodes
-  NODECOUNT=`kubectl get no --no-headers=true | wc -l`
+  NODECOUNT=`kubectl get no --no-headers=true | wc -l | tr -d " "`
   
   # Scale up the deployment
   kubectl scale deployment nginx --replicas=`expr $NODECOUNT + 2`
