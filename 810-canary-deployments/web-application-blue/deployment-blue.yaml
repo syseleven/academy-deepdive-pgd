@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: echo
-          image: "docker.io/hashicorp/http-echo"
+          image: "docker.io/hashicorp/http-echo:0.2.3"
           args:
             - -listen=:80
             - --text="echo-blue"
