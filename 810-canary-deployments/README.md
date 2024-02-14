@@ -96,20 +96,31 @@ Create a "blue" and "green" deployment. Shift the traffic over to "green" contin
 
 ## Increase traffic routed to green
 
-* Increase the weight value in the file `web-application-green/ingress-green-canary.yaml` in steps like 50, 75, 100
-
-  ```yaml
-  [...]
-  annotations:
-    nginx.ingress.kubernetes.io/canary-weight: "75" # <-- please adjust later up to 100
-  [...]
-  ```
-
-* After each increase update the ingress resource in the cluster:
+* Update the weight annotation of the ingress resource:
 
   ```shell
-  kubectl apply -f web-application-green/ingress-green-canary.yaml
+  kubectl -n ${YOURNAME} annotate --overwrite ingress ingress-echo-canary nginx.ingress.kubernetes.io/canary-weight=75
   ```
+
+---
+
+* Alternative (optional)
+  * Increase the weight value in the file `web-application-green/ingress-green-canary.yaml` in steps like 50, 75, 100
+
+    ```yaml
+    [...]
+    annotations:
+      nginx.ingress.kubernetes.io/canary-weight: "75" # <-- please adjust later up to 100
+    [...]
+    ```
+
+  * After each increase update the ingress resource in the cluster:
+
+    ```shell
+    kubectl apply -f web-application-green/ingress-green-canary.yaml
+    ```
+
+---
 
 * Check if the traffic shifts according to your weight setting:
 
