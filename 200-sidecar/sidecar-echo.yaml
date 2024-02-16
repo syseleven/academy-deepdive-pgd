@@ -23,9 +23,9 @@ spec:
     - name: var-logs
       mountPath: /usr/share/nginx/html
   dnsPolicy: Default
-  # wir erstellen ein besondere Art von Volume
-  # Container in einem Pod teilen Netzwerk und Storage
-  # Beide Container mounten das Volume, jedoch unter unterschiedlichen Pfaden
-  volumes:
+  # create a special type of volume: emptydir
+  # containers in the same pod share storage
+  # bot containers mount the volume but under different mount paths
+    volumes:
   - name: var-logs
     emptyDir: {}

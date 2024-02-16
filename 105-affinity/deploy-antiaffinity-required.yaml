@@ -15,10 +15,9 @@ spec:
         app: nginx
     spec:
       affinity:
-        # Pod soll NICHT auf und der selben Node gescheduled werden
+        # pod should not be scheduled on the same node
         podAntiAffinity:
-          # aber wenn er schon mal drauf läuft, dann egal
-          #preferredDuringSchedulingIgnoredDuringExecution:
+          # but if it already running there, nevermind
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchExpressions:

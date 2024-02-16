@@ -20,8 +20,8 @@ spec:
         livenessProbe:
           exec:
             command:
-            - cat
-            - /usr/share/nginx/html/index.html
+            - curl
+            - http://localhost
           initialDelaySeconds: 5
           periodSeconds: 5
           timeoutSeconds: 1

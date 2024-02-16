@@ -16,11 +16,11 @@ spec:
     spec:
       containers:
         - name: echo
-          image: "docker.io/hashicorp/http-echo:0.2.3"
+          image: "docker.io/hashicorp/http-echo:1.0.0"
           args:
-            - -listen=:80
-            - --text="echo-blue"
+            - -listen=:8080
+            - -text="echo-blue"
           ports:
             - name: http
               protocol: TCP
-              containerPort: 80
+              containerPort: 8080
