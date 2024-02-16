@@ -27,6 +27,21 @@
   kubectl get po -l app=nginx-probes
   ```
 
+* Verify the liveness probe is executed and successful
+
+  ```shell
+  kubectl logs -f -l app=nginx-probes
+  ```
+
+* Expected result:
+
+  ```shell
+  2024/02/16 08:29:16 [notice] 1#1: start worker process 34
+  ::1 - - [16/Feb/2024:08:29:21 +0000] "GET / HTTP/1.1" 200 615 "-" "curl/7.74.0" "-"
+  ::1 - - [16/Feb/2024:08:29:26 +0000] "GET / HTTP/1.1" 200 615 "-" "curl/7.74.0" "-"
+  ::1 - - [16/Feb/2024:08:29:31 +0000] "GET / HTTP/1.1" 200 615 "-" "curl/7.74.0" "-"
+  ```
+
 ### Clean up
 
 * Delete the deployment
