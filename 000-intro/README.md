@@ -4,8 +4,8 @@
 
 ## Module info
 
-* **Duration:** ~5 hours 
-* **Works with k8s version** 1.24
+* **Duration:** ~5-6 hours 
+* **Works with k8s version** 1.27
 * **Workshop Domain:** *.workshop.metakube.org
 * **Optimized for** Linux and MacOS
 * Windows Users use WSL and/or PowerShell (you must be able to use shell variables)
@@ -23,7 +23,7 @@ You need to have these tools installed on your local machine:
 
 - kubectl (>1.24)
 - helm (>3.10)
-- helmfile
+- [helmfile](https://github.com/databus23/helm-diff)
 - Optional: kubectx
 
 ## Preparation for participants
@@ -31,10 +31,9 @@ You need to have these tools installed on your local machine:
 * Before you begin with the actual exercise please make sure to follow these steps to work in your own environment:
 
   ```shell
-  read -p "Please enter your name (without blanks e.g. johndoe): " YOURNAME
-  export YOURNAME
+  # "Please enter your name (without blanks e.g. johndoe)"
+  export YOURNAME=<johndoe>
   kubectl create ns ${YOURNAME}
-  kubectl label namespace ${YOURNAME} deepdive-pgd=true
   kubectl config set-context --current --namespace=${YOURNAME}
   ```
 

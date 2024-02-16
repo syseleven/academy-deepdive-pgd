@@ -7,10 +7,9 @@ Helmfile is a tool to combine multiple Helm Charts and their respective installa
 * Before you begin with the actual exercise please make sure to follow these steps to work in your own environment:
 
   ```shell
-  read -p "Please enter your name (without blanks e.g. johndoe): " YOURNAME
-  export YOURNAME
+  # "Please enter your name (without blanks e.g. johndoe)"
+  export YOURNAME=<johndoe>
   kubectl create ns ${YOURNAME}
-  kubectl label namespace ${YOURNAME} deepdive-pgd=true
   kubectl config set-context --current --namespace=${YOURNAME}
   ```
 
